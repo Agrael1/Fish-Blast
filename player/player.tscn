@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://la0dchcbm681"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_iwajf"]
+[ext_resource type="Script" path="res://player/player_input/player_input.gd" id="2_i65fg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8rk1"]
+size = Vector2(35, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7epx7"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n4llj"]
+size = Vector2(50, 50)
+
+[node name="Player" type="RigidBody2D"]
+collision_layer = 2
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_iwajf")
+
+[node name="PlayerCollisionGeo" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_r8rk1")
+
+[node name="HitboxArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea"]
+shape = SubResource("RectangleShape2D_7epx7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_n4llj")
+
+[node name="PlayerInput" type="Node" parent="."]
+script = ExtResource("2_i65fg")

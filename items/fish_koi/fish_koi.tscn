@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c31y0trx1inta"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4srgf"]
+size = Vector2(40, 40)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4vnuw"]
+size = Vector2(30, 30)
+
+[node name="FishKoi" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_4srgf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_4vnuw")

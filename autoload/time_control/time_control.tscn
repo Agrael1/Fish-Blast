@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdgc8m7imibj2"]
+
+[ext_resource type="Script" path="res://autoload/time_control/time_control.gd" id="1_f5ye3"]
+
+[node name="TimeControl" type="Node"]
+process_mode = 3
+script = ExtResource("1_f5ye3")
+
+[node name="HitstopTimer" type="Timer" parent="."]
+one_shot = true

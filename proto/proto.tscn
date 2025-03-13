@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://cx0bs1d4iphwh"]
+
+[ext_resource type="PackedScene" uid="uid://la0dchcbm681" path="res://player/player.tscn" id="1_cprly"]
+[ext_resource type="Script" path="res://proto/random_spawner.gd" id="2_2igbb"]
+[ext_resource type="Script" path="res://proto/spawn_table_entry.gd" id="3_yi7bl"]
+[ext_resource type="PackedScene" uid="uid://c31y0trx1inta" path="res://items/fish_koi/fish_koi.tscn" id="4_kc6kp"]
+
+[sub_resource type="Resource" id="Resource_u6ty6"]
+script = ExtResource("3_yi7bl")
+scene = ExtResource("4_kc6kp")
+spawn_interval_min_seconds = 0.1
+spawn_interval_max_seconds = 1.0
+amount_to_spawn_at_once_min = 1
+amount_to_spawn_at_once_max = 1
+find_scene_size_method = 0
+dimensions = Vector2(0, 0)
+offset = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7m8kx"]
+size = Vector2(71, 426)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k1a6"]
+size = Vector2(778, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3n4b"]
+size = Vector2(74, 551)
+
+[node name="Proto" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_cprly")]
+position = Vector2(286, 172)
+
+[node name="SpawnArea" type="Area2D" parent="." node_paths=PackedStringArray("spawn_area")]
+script = ExtResource("2_2igbb")
+spawn_area = NodePath("CollisionShape2D")
+spawn_table = Array[ExtResource("3_yi7bl")]([SubResource("Resource_u6ty6")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
+position = Vector2(696, 213)
+shape = SubResource("RectangleShape2D_7m8kx")
+
+[node name="WallsForPlayer" type="StaticBody2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallsForPlayer"]
+position = Vector2(361, -33)
+shape = SubResource("RectangleShape2D_7k1a6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WallsForPlayer"]
+position = Vector2(371, 457)
+shape = SubResource("RectangleShape2D_7k1a6")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="WallsForPlayer"]
+position = Vector2(784, 210)
+shape = SubResource("RectangleShape2D_n3n4b")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="WallsForPlayer"]
+position = Vector2(-34, 210)
+shape = SubResource("RectangleShape2D_n3n4b")
