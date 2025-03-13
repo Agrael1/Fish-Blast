@@ -13,6 +13,13 @@ const SCREENSHAKE_RECOVERY_LERP_SPEED = 0.1
 const MAX_PERFRAME_SHAKE_DISTANCE = Vector2(0.5, 0.5)
 const MAX_TOTAL_SHAKE_DISTANCE = Vector2(10, 10)
 
+func _ready() -> void:
+	var instant_teleport_to_target_first_frame := func() -> void:
+		if is_instance_valid(_follow_target):
+			_pivot.global_position = _follow_target.global_position
+	
+	instant_teleport_to_target_first_frame.call_deferred()
+
 func shake(max_magnitude: float, duration_seconds: float, axes: Vector2 = Vector2(1, 1)) -> void:
 	_screenshakes.append({
 		max_magnitude = max_magnitude,
