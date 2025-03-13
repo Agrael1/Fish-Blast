@@ -13,4 +13,3 @@ func _process(_delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	self.linear_velocity = input.get_movement_vector() * GsomConsole.get_cvar("cl_movespeed")
-
