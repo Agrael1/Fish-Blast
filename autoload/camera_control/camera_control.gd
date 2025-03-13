@@ -21,7 +21,8 @@ func shake(max_magnitude: float, duration_seconds: float, axes: Vector2 = Vector
 	})
 
 func request_follow(new_target: CameraFollowTarget) -> void:
-	if is_instance_valid(_follow_target) and _follow_target.priority <= new_target.priority:
+	var has_target := is_instance_valid(_follow_target)
+	if (has_target and _follow_target.priority <= new_target.priority) or not has_target:
 		_follow_target = new_target
 
 func _process(delta: float) -> void:

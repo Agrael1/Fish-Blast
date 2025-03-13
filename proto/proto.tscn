@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cx0bs1d4iphwh"]
+[gd_scene load_steps=10 format=3 uid="uid://cx0bs1d4iphwh"]
 
 [ext_resource type="PackedScene" uid="uid://la0dchcbm681" path="res://player/player.tscn" id="1_cprly"]
 [ext_resource type="Script" path="res://proto/random_spawner.gd" id="2_2igbb"]
 [ext_resource type="Script" path="res://proto/spawn_table_entry.gd" id="3_yi7bl"]
 [ext_resource type="PackedScene" uid="uid://c31y0trx1inta" path="res://items/fish_koi/fish_koi.tscn" id="4_kc6kp"]
+[ext_resource type="PackedScene" uid="uid://do8kpqvl2cy52" path="res://objects/camera_follow_target/camera_follow_target.tscn" id="5_0vm6q"]
 
 [sub_resource type="Resource" id="Resource_u6ty6"]
 script = ExtResource("3_yi7bl")
@@ -57,3 +58,6 @@ shape = SubResource("RectangleShape2D_n3n4b")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="WallsForPlayer"]
 position = Vector2(-34, 210)
 shape = SubResource("RectangleShape2D_n3n4b")
+
+[node name="CameraFollowTarget" parent="." instance=ExtResource("5_0vm6q")]
+position = Vector2(368, 216)
