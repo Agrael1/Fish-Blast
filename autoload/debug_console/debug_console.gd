@@ -21,6 +21,11 @@ func _ready() -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		)
 
+	GsomConsole.register_cvar("movespeed", 350.0, "Floating point scalar value for the maximum speed reachable with WASD")
+	GsomConsole.register_cvar("fish_speed", 100.0)
+	GsomConsole.register_cvar("fish_wiggle", 0.005)
+	GsomConsole.register_cvar("fish_wiggle_magnitude", 50.0)
+
 func _process(_delta: float) -> void:
 	# use global input singleton to prevent any swallowing of inputs to debug console
 	if Input.is_action_just_pressed(&"debug_console"):
