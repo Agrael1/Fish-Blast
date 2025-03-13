@@ -1,6 +1,6 @@
-# hook line and sinker / left hook, right hook / untitled fishing hell
+# fish blast
 
-game for class
+bullet hell game for class
 
 ## the idea
 
