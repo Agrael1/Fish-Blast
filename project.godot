@@ -22,6 +22,10 @@ TimeControl="*res://autoload/time_control/time_control.tscn"
 DebugConsole="*res://autoload/debug_console/debug_console.tscn"
 CameraControl="*res://autoload/camera_control/camera_control.tscn"
 
+[display]
+
+mouse_cursor/custom_image="res://assets/textures/cursor_idle_scaled.png"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gsom_console/plugin.cfg")
