@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c31y0trx1inta"]
 
-[ext_resource type="Script" path="res://items/fish_koi/fish_koi.gd" id="1_oagdh"]
+[ext_resource type="Script" path="res://player/player_input/fish_koi.gd" id="1_oagdh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4srgf"]
 size = Vector2(40, 40)

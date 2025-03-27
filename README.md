@@ -36,7 +36,7 @@ bullet hell game for class
 - losing coins when you get hit seems like not a big enough issue. maybe a separate
   health bar and some additional health items in the flow could be good
   - maybe losing a _lot_ of coins when you get hit could solve this bullet and
-    the previous bullet? maybe a percentage of your total coins?
+	the previous bullet? maybe a percentage of your total coins?
 
 ### additional notes about overall style / effects
 

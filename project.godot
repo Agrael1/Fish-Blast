@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="fishblast"
-run/main_scene="res://proto/proto.tscn"
+run/main_scene="res://proto/menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -87,8 +87,3 @@ ability_bobber={
 
 2d/default_gravity=0.0
 2d/default_linear_damp=0.0
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
