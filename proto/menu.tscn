@@ -2,9 +2,14 @@
 
 [node name="Menu" type="Node2D"]
 
-[node name="MainMenu" type="MainMenu" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PanelContainer" type="PanelContainer" parent="MainMenu"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -110.0
 offset_top = -46.0
 offset_right = 110.0
@@ -13,29 +18,34 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenu/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Play" type="Button" parent="MainMenu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MainMenu" type="MainMenu" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+position = Vector2(-10, -10)
+
+[node name="Play" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Play
 "
 
-[node name="Quit" type="Button" parent="MainMenu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Quit
 "
+
+[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/Play" to="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/MainMenu" method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/Quit" to="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/MainMenu" method="_on_QuitButton_pressed"]

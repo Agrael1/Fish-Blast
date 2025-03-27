@@ -200,3 +200,7 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_3fwmx")
 }
+
+[connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="PauseMenu" method="on_resume_button_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Restart" to="PauseMenu" method="on_restart_button_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Quit" to="PauseMenu" method="on_quit_button_pressed"]

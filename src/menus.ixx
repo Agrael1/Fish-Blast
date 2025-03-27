@@ -16,21 +16,10 @@ class MainMenu : public godot::Node2D
     GDCLASS(MainMenu, godot::Node2D);
 
 public:
-    void _ready() override
-    {
-
-        // Get button nodes
-        auto play_button = get_node<godot::Button>("PanelContainer/MarginContainer/VBoxContainer/Play");
-        auto quit_button = get_node<godot::Button>("PanelContainer/MarginContainer/VBoxContainer/Quit");
-
-        // Connect button signals
-        if (play_button && quit_button) {
-            play_button->connect("pressed", callable_mp(this, &MainMenu::_on_PlayButton_pressed));
-            quit_button->connect("pressed", callable_mp(this, &MainMenu::_on_QuitButton_pressed));
-        }
-    }
     static void _bind_methods()
     {
+        godot::ClassDB::bind_method(godot::D_METHOD("_on_PlayButton_pressed"), &MainMenu::_on_PlayButton_pressed);
+        godot::ClassDB::bind_method(godot::D_METHOD("_on_QuitButton_pressed"), &MainMenu::_on_QuitButton_pressed);
     }
 
     void _on_PlayButton_pressed()
@@ -54,14 +43,6 @@ public:
     void _ready() override
     {
         godot::InputMap::get_singleton()->load_from_project_settings();
-        auto resume_button = get_node<godot::Button>("PanelContainer/MarginContainer/VBoxContainer/Resume");
-        auto restart_button = get_node<godot::Button>("PanelContainer/MarginContainer/VBoxContainer/Restart");
-        auto quit_button = get_node<godot::Button>("PanelContainer/MarginContainer/VBoxContainer/Quit");
-        if (resume_button && quit_button) {
-            resume_button->connect("pressed", callable_mp(this, &PauseMenu::on_resume_button_pressed));
-            restart_button->connect("pressed", callable_mp(this, &PauseMenu::on_restart_button_pressed));
-            quit_button->connect("pressed", callable_mp(this, &PauseMenu::on_quit_button_pressed));
-        }
         animation_player = get_node<godot::AnimationPlayer>("AnimationPlayer");
         if (animation_player) {
             animation_player->play("RESET");
@@ -69,6 +50,9 @@ public:
     }
     static void _bind_methods()
     {
+        godot::ClassDB::bind_method(godot::D_METHOD("on_resume_button_pressed"), &PauseMenu::on_resume_button_pressed);
+        godot::ClassDB::bind_method(godot::D_METHOD("on_quit_button_pressed"), &PauseMenu::on_quit_button_pressed);
+        godot::ClassDB::bind_method(godot::D_METHOD("on_restart_button_pressed"), &PauseMenu::on_restart_button_pressed);
     }
 
     void _process(float delta)
@@ -81,7 +65,6 @@ public:
     {
         get_tree()->set_pause(false);
         animation_player->play_backwards("blur");
-        queue_free();
     }
 
     void pause()
@@ -105,7 +88,8 @@ public:
 
     void on_quit_button_pressed()
     {
-        get_tree()->change_scene_to_file("res://proto/menu.tscn");
+        auto& tree = *get_tree();
+        tree.change_scene_to_file("res://proto/menu.tscn");
     }
 
     void on_restart_button_pressed()

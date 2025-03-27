@@ -21,7 +21,7 @@ func spawn(scene: PackedScene, amount: int) -> void:
 	for idx in amount:
 		var spawned = scene.instantiate()
 		spawned.global_position = spawn_area.global_position + Vector2(0, randf_range(-_shape.size.y, _shape.size.y))
-		get_tree().root.add_child(spawned, true)
+		add_child(spawned, true)
 
 func _process(delta: float) -> void:
 	for idx in _spawn_times.size():
