@@ -9,8 +9,8 @@ add_library(fish-blast SHARED)
 target_sources(fish-blast 
     PRIVATE FILE_SET CXX_MODULES FILES
         "src/entry_main.ixx"
-        "src/main_menu.ixx"
- )
+        "src/menus.ixx"
+  )
 
 target_link_libraries(fish-blast PRIVATE godot::cpp reflect)
 set_target_properties(fish-blast PROPERTIES 
