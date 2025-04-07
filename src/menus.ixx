@@ -91,8 +91,8 @@ public:
 
     void on_quit_button_pressed()
     {
-        auto& tree = *get_tree();
-        tree.change_scene_to_file("res://proto/menu.tscn");
+        resume();
+        get_tree()->change_scene_to_file("res://proto/menu.tscn");
     }
 
     void on_restart_button_pressed()
