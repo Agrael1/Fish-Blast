@@ -47,6 +47,7 @@ public:
         if (animation_player) {
             animation_player->play("RESET");
         }
+        set_visible(false);
     }
     static void _bind_methods()
     {
@@ -65,10 +66,12 @@ public:
     {
         get_tree()->set_pause(false);
         animation_player->play_backwards("blur");
+        set_visible(false);
     }
 
     void pause()
     {
+        set_visible(true);
         get_tree()->set_pause(true);
         animation_player->play("blur");
     }
