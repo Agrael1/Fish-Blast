@@ -5,6 +5,7 @@ module;
 export module entry_main;
 
 import fb.main_menu;
+import fb.player;
 
 void register_gameplay_types(godot::ModuleInitializationLevel p_level)
 {
@@ -15,6 +16,7 @@ void register_gameplay_types(godot::ModuleInitializationLevel p_level)
 
     godot::ClassDB::register_class<fb::MainMenu>();
     godot::ClassDB::register_class<fb::PauseMenu>();
+    godot::ClassDB::register_class<fb::PlayerControl>();
 }
 
 void unregister_gameplay_types(godot::ModuleInitializationLevel p_level)
