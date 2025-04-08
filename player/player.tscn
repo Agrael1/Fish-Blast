@@ -9,6 +9,7 @@ size = Vector2(35, 35)
 size = Vector2(50, 50)
 
 [node name="PlayerControl" type="PlayerControl"]
+position = Vector2(-46.6667, 0)
 
 [node name="PlayerCollisionGeo" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_r8rk1")

@@ -6,7 +6,7 @@ extends RigidBody2D
 
 func _ready() -> void:	
 	hitbox_area.area_entered.connect(func(_unused) -> void:
-		CameraControl.shake(4, 0.1)
+		#CameraControl.shake(4, 0.1)
 		)
 
 func _process(_delta: float) -> void:

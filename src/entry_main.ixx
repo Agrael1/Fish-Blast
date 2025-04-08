@@ -17,6 +17,8 @@ void register_gameplay_types(godot::ModuleInitializationLevel p_level)
     godot::ClassDB::register_class<fb::MainMenu>();
     godot::ClassDB::register_class<fb::PauseMenu>();
     godot::ClassDB::register_class<fb::PlayerControl>();
+    godot::ClassDB::register_class<fb::CameraController>();
+    godot::ClassDB::register_class<fb::CameraFollowTargetX>();
 }
 
 void unregister_gameplay_types(godot::ModuleInitializationLevel p_level)

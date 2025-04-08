@@ -7,4 +7,5 @@ extends Node2D
 @export var priority: int = 0
 
 func _enter_tree() -> void:
-	CameraControl.request_follow(self)
+	pass
+	#CameraControl.request_follow(self)

@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 GsomConsole="*res://addons/gsom_console/./gsom_console_autoload.gd"
 TimeControl="*res://autoload/time_control/time_control.tscn"
 DebugConsole="*res://autoload/debug_console/debug_console.tscn"
-CameraControl="*res://autoload/camera_control/camera_control.tscn"
 
 [display]
 
