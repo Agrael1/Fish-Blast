@@ -17,7 +17,6 @@ func _ready() -> void:
 		_spawn_times[idx] = spawn_table[idx].generate_random_spawn_interval_seconds()
 
 func spawn(scene: PackedScene, amount: int) -> void:
-	print("spawning ", amount, " of ", scene)
 	for idx in amount:
 		var spawned = scene.instantiate()
 		spawned.global_position = spawn_area.global_position + Vector2(0, randf_range(-_shape.size.y, _shape.size.y))

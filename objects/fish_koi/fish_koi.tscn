@@ -1,7 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c31y0trx1inta"]
 
-[sub_resource type="Resource" id="Resource_llga3"]
-metadata/__load_path__ = "res://player/player_input/fish_koi.gd"
+[ext_resource type="Script" uid="uid://b48noms35ug7w" path="res://objects/fish_koi/fish_koi.gd" id="1_6dlnu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4srgf"]
 size = Vector2(40, 40)
@@ -10,7 +9,7 @@ size = Vector2(40, 40)
 size = Vector2(30, 30)
 
 [node name="FishKoi" type="Node2D"]
-script = SubResource("Resource_llga3")
+script = ExtResource("1_6dlnu")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

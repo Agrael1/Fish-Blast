@@ -15,4 +15,3 @@ func _physics_process(delta: float) -> void:
 	var fish_wiggle: float = GsomConsole.get_cvar("fish_wiggle")
 	var fish_wiggle_magnitude: float = GsomConsole.get_cvar("fish_wiggle_magnitude")
 	pivot.position.y = sin((Time.get_ticks_msec() - _spawn_time) * fish_wiggle  * _speed_multiplier) * fish_wiggle_magnitude
-

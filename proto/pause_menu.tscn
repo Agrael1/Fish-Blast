@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://2htpaui3yt32"]
+[gd_scene load_steps=7 format=3 uid="uid://2htpaui3yt32"]
 
+[ext_resource type="Script" uid="uid://b2x2ugt6gv71u" path="res://proto/pause_menu.gd" id="1_50ldd"]
 [ext_resource type="Shader" uid="uid://d2jdghxro28js" path="res://shaders/pause_menu.gdshader" id="1_kkfs0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wws41"]
@@ -11,7 +12,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PauseMenu/ColorRect:material:shader_parameter/lod")
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,7 +24,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PauseMenu/PanelContainer:modulate:r")
+tracks/1/path = NodePath("PanelContainer:modulate:r")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -34,7 +35,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PauseMenu/PanelContainer:modulate:g")
+tracks/2/path = NodePath("PanelContainer:modulate:g")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -45,7 +46,7 @@ tracks/2/keys = {
 tracks/3/type = "bezier"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PauseMenu/PanelContainer:modulate:b")
+tracks/3/path = NodePath("PanelContainer:modulate:b")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -56,7 +57,7 @@ tracks/3/keys = {
 tracks/4/type = "bezier"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PauseMenu/PanelContainer:modulate:a")
+tracks/4/path = NodePath("PanelContainer:modulate:a")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -71,7 +72,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PauseMenu/ColorRect:material:shader_parameter/lod")
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -83,7 +84,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PauseMenu/PanelContainer:modulate:r")
+tracks/1/path = NodePath("PanelContainer:modulate:r")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -94,7 +95,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PauseMenu/PanelContainer:modulate:g")
+tracks/2/path = NodePath("PanelContainer:modulate:g")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -105,7 +106,7 @@ tracks/2/keys = {
 tracks/3/type = "bezier"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PauseMenu/PanelContainer:modulate:b")
+tracks/3/path = NodePath("PanelContainer:modulate:b")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -116,7 +117,7 @@ tracks/3/keys = {
 tracks/4/type = "bezier"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PauseMenu/PanelContainer:modulate:a")
+tracks/4/path = NodePath("PanelContainer:modulate:a")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -131,7 +132,7 @@ _data = {
 &"blur": SubResource("Animation_7m4rd")
 }
 
-[node name="Pause Menu" type="Control"]
+[node name="Pause Menu" type="Control" node_paths=PackedStringArray("animation_player")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -139,17 +140,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_50ldd")
+animation_player = NodePath("AnimationPlayer")
 
-[node name="PauseMenu" type="PauseMenu" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+[node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_wws41")
 layout_mode = 1
 anchors_preset = 15
@@ -158,7 +152,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="PauseMenu"]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -173,35 +167,34 @@ offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Resume" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Resume"
 
-[node name="Restart" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Restart" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Restart"
 
-[node name="Quit" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "To Main Menu
 "
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu"]
-root_node = NodePath("../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_3fwmx")
+&"": SubResource("AnimationLibrary_3fwmx")
 }
 
-[connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="PauseMenu" method="on_resume_button_pressed"]
-[connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Restart" to="PauseMenu" method="on_restart_button_pressed"]
-[connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Quit" to="PauseMenu" method="on_quit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_button_pressed"]
