@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cm431vf0jy05u"]
 
-[ext_resource type="Script" path="res://autoload/debug_console/debug_console.gd" id="1_w5ivh"]
+[ext_resource type="Script" uid="uid://m6tykuinvivf" path="res://autoload/debug_console/debug_console.gd" id="1_w5ivh"]
 [ext_resource type="PackedScene" uid="uid://d3jm7r6ulco1u" path="res://addons/gsom_console/nodes/console.tscn" id="2_xewq0"]
 
 [node name="DebugConsole" type="Node" groups=["menu_unpaused"]]

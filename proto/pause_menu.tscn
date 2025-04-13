@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://2htpaui3yt32"]
 
-[ext_resource type="Shader" path="res://shaders/pause_menu.gdshader" id="1_kkfs0"]
+[ext_resource type="Shader" uid="uid://d2jdghxro28js" path="res://shaders/pause_menu.gdshader" id="1_kkfs0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wws41"]
 shader = ExtResource("1_kkfs0")
@@ -127,8 +127,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3fwmx"]
 _data = {
-"RESET": SubResource("Animation_34bm6"),
-"blur": SubResource("Animation_7m4rd")
+&"RESET": SubResource("Animation_34bm6"),
+&"blur": SubResource("Animation_7m4rd")
 }
 
 [node name="Pause Menu" type="Control"]

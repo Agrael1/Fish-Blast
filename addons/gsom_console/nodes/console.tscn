@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://d3jm7r6ulco1u"]
 
 [ext_resource type="Theme" uid="uid://dicw3tpmpx0f2" path="res://addons/gsom_console/resources/console.theme" id="1_855tn"]
-[ext_resource type="Script" path="res://addons/gsom_console/nodes/console.gd" id="2_8s0l7"]
-[ext_resource type="Shader" path="res://addons/gsom_console/resources/blur.gdshader" id="3_vb7yd"]
+[ext_resource type="Script" uid="uid://dme2xocouy1mc" path="res://addons/gsom_console/nodes/console.gd" id="2_8s0l7"]
+[ext_resource type="Shader" uid="uid://dpa41o8rx6vyu" path="res://addons/gsom_console/resources/blur.gdshader" id="3_vb7yd"]
 [ext_resource type="PackedScene" uid="uid://ve34jvxp5je" path="res://addons/gsom_console/nodes/button_hint.tscn" id="4_qgvsu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_quour"]

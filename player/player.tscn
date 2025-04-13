@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://la0dchcbm681"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1_iwajf"]
-[ext_resource type="Script" path="res://player/player_input/player_input.gd" id="2_i65fg"]
+[ext_resource type="Script" uid="uid://cwundcra2h4om" path="res://player/player.gd" id="1_iwajf"]
+[ext_resource type="Script" uid="uid://cvtdx4l852lpo" path="res://player/player_input/player_input.gd" id="2_i65fg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_75emq"]
 friction = 0.0
