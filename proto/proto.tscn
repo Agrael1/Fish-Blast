@@ -31,7 +31,7 @@ dimensions = Vector2(0, 0)
 offset = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7m8kx"]
-size = Vector2(71, 426)
+size = Vector2(71, 244)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qlaci"]
 friction = 0.0
@@ -53,7 +53,7 @@ spawn_area = NodePath("CollisionShape2D")
 spawn_table = Array[ExtResource("3_yi7bl")]([SubResource("Resource_u6ty6"), SubResource("Resource_ar1wf")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
-position = Vector2(696, 213)
+position = Vector2(507, 137)
 shape = SubResource("RectangleShape2D_7m8kx")
 
 [node name="WallsForPlayer" type="StaticBody2D" parent="."]
@@ -61,23 +61,23 @@ collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_qlaci")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallsForPlayer"]
-position = Vector2(361, -33)
+position = Vector2(237, -25)
 shape = SubResource("RectangleShape2D_7k1a6")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="WallsForPlayer"]
-position = Vector2(371, 457)
+position = Vector2(308, 297)
 shape = SubResource("RectangleShape2D_7k1a6")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="WallsForPlayer"]
-position = Vector2(784, 210)
+position = Vector2(508, 160)
 shape = SubResource("RectangleShape2D_n3n4b")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="WallsForPlayer"]
-position = Vector2(-34, 210)
+position = Vector2(-33, 122)
 shape = SubResource("RectangleShape2D_n3n4b")
 
 [node name="CameraFollowTarget" parent="." instance=ExtResource("5_0vm6q")]
-position = Vector2(368, 216)
+position = Vector2(240, 135)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
