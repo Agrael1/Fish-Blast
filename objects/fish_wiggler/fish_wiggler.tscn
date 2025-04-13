@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cp13fynamjmc7"]
 
-[ext_resource type="Script" uid="uid://cb5vlb8ku6kiy" path="res://items/fish_wiggler/fish_wiggler.gd" id="1_f75gs"]
+[ext_resource type="Script" uid="uid://cb5vlb8ku6kiy" path="res://objects/fish_wiggler/fish_wiggler.gd" id="1_f75gs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_658oq"]
 size = Vector2(40, 40)
