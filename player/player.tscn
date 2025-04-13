@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://la0dchcbm681"]
+[gd_scene load_steps=12 format=3 uid="uid://la0dchcbm681"]
 
 [ext_resource type="Script" uid="uid://cwundcra2h4om" path="res://player/player.gd" id="1_iwajf"]
 [ext_resource type="Texture2D" uid="uid://vcdgv066yger" path="res://assets/textures/player_still.png" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://cvtdx4l852lpo" path="res://player/player_input/player_input.gd" id="2_i65fg"]
+[ext_resource type="Script" uid="uid://dtdfumqlaoaqa" path="res://player/player_buffered_input.gd" id="4_yw30f"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_75emq"]
 friction = 0.0
@@ -47,6 +48,10 @@ texture = ExtResource("2_g1dw6")
 
 [node name="PlayerInput" type="Node" parent="."]
 script = ExtResource("2_i65fg")
+
+[node name="PlayerBufferedInput" type="Node" parent="PlayerInput" node_paths=PackedStringArray("player_input")]
+script = ExtResource("4_yw30f")
+player_input = NodePath("..")
 
 [node name="Hook" type="Area2D" parent="."]
 position = Vector2(52, 0)

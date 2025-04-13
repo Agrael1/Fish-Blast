@@ -14,7 +14,7 @@ func _ready() -> void:
 			TimeControl.unpause_game()
 		)
 
-	GsomConsole.register_cvar("movespeed", 350.0, "Floating point scalar value for the maximum speed reachable with WASD")
+	
 	GsomConsole.register_cvar("fish_speed", 100.0)
 	GsomConsole.register_cvar("fish_wiggle", 0.005)
 	GsomConsole.register_cvar("fish_wiggle_magnitude", 50.0)
