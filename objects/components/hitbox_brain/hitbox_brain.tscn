@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx2yicjb0mlim"]
+
+[ext_resource type="Script" uid="uid://cmj0k6m6kxxpk" path="res://objects/components/hitbox_brain/hitbox_brain.gd" id="1_dsx2n"]
+
+[node name="HitboxBrain" type="Node2D"]
+script = ExtResource("1_dsx2n")

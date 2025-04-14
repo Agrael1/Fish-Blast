@@ -66,6 +66,13 @@ func queue_hitstop(seconds: float) -> void:
 		assert(not hitstop_timer.paused)
 		_update_hitstop()
 
+## Pause the game for some amount of time in seconds. Only one of these requests can be made per
+## frame, and it overrides any requests that have been made via queue_hitstop.
+## TODO: maybe some namespaced hitstop thing where it only accepts one hitstop per namespace per frame?
+func force_hitstop(seconds: float) -> void:
+	_hitstop_queue.clear()
+	queue_hitstop(seconds)
+
 func slow_time(time_scale: float, duration: float, callback: Callable = func(): pass) -> void:
 	Engine.time_scale = maxf(time_scale, pow(2, -24))
 	await get_tree().create_timer(duration, true, false, true).timeout

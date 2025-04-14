@@ -37,6 +37,7 @@ enabled=PackedStringArray("res://addons/gsom_console/plugin.cfg")
 [global_group]
 
 menu_unpaused="Should not freeze when the menu is opened"
+hitstop_unpaused="Nodes that should not be paused during a hitstop frame."
 
 [input]
 

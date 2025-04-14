@@ -13,16 +13,16 @@ friction = 0.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7epx7"]
 size = Vector2(30, 30)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
-size = Vector2(16, 16)
-
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qjkh3"]
 size = Vector2(16, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
-size = Vector2(10, 10)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
+size = Vector2(16, 16)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_g1dw6"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
 size = Vector2(10, 10)
 
 [node name="Player" type="RigidBody2D"]
@@ -46,27 +46,35 @@ shape = SubResource("RectangleShape2D_7epx7")
 texture_filter = 1
 texture = ExtResource("2_g1dw6")
 
-[node name="PlayerInput" type="Node" parent="."]
+[node name="PlayerInput" type="Node" parent="." groups=["hitstop_unpaused"]]
 script = ExtResource("2_i65fg")
 
 [node name="PlayerBufferedInput" type="Node" parent="PlayerInput" node_paths=PackedStringArray("player_input")]
 script = ExtResource("4_yw30f")
 player_input = NodePath("..")
 
-[node name="Bobber" type="ShapeCast2D" parent="."]
+[node name="Bobber" type="Area2D" parent="."]
 position = Vector2(52, 60)
-shape = SubResource("RectangleShape2D_yw30f")
+collision_layer = 0
 collision_mask = 4
+monitorable = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Bobber"]
 texture_filter = 1
 texture = SubResource("PlaceholderTexture2D_qjkh3")
 
-[node name="Hook" type="ShapeCast2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bobber"]
+shape = SubResource("RectangleShape2D_yw30f")
+
+[node name="Hook" type="Area2D" parent="."]
 position = Vector2(52, 0)
-shape = SubResource("RectangleShape2D_qjkh3")
+collision_layer = 0
 collision_mask = 4
+monitorable = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Hook"]
 texture_filter = 1
 texture = SubResource("PlaceholderTexture2D_g1dw6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hook"]
+shape = SubResource("RectangleShape2D_qjkh3")

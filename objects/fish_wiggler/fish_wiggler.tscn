@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cp13fynamjmc7"]
+[gd_scene load_steps=6 format=3 uid="uid://cp13fynamjmc7"]
 
 [ext_resource type="Script" uid="uid://cb5vlb8ku6kiy" path="res://objects/fish_wiggler/fish_wiggler.gd" id="1_f75gs"]
 [ext_resource type="PackedScene" uid="uid://c13w6w7lbu4dw" path="res://objects/components/hitbox/hitbox.tscn" id="2_muvb5"]
+[ext_resource type="PackedScene" uid="uid://dx2yicjb0mlim" path="res://objects/components/hitbox_brain/hitbox_brain.tscn" id="2_u7mw0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_658oq"]
 size = Vector2(40, 40)
@@ -9,14 +10,20 @@ size = Vector2(40, 40)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2qlsx"]
 size = Vector2(30, 30)
 
-[node name="FishWiggler" type="Node2D"]
+[node name="FishWiggler" type="RigidBody2D" node_paths=PackedStringArray("_hitbox_brain")]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_f75gs")
+_hitbox_brain = NodePath("HitboxBrain")
 
-[node name="Hitbox" parent="." instance=ExtResource("2_muvb5")]
+[node name="HitboxBrain" parent="." instance=ExtResource("2_u7mw0")]
+invuln_time_seconds = 0.2
+
+[node name="Hitbox" parent="HitboxBrain" instance=ExtResource("2_muvb5")]
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxBrain/Hitbox"]
 shape = SubResource("RectangleShape2D_658oq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
