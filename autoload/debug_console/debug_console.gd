@@ -13,7 +13,6 @@ func _ready() -> void:
 		else:
 			TimeControl.unpause_game()
 		)
-
 	
 	GsomConsole.register_cvar("fish_speed", 100.0)
 	GsomConsole.register_cvar("fish_wiggle", 0.005)

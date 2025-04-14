@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c31y0trx1inta"]
+[gd_scene load_steps=5 format=3 uid="uid://c31y0trx1inta"]
 
 [ext_resource type="Script" uid="uid://b48noms35ug7w" path="res://objects/fish_koi/fish_koi.gd" id="1_6dlnu"]
+[ext_resource type="PackedScene" uid="uid://c13w6w7lbu4dw" path="res://objects/components/hitbox/hitbox.tscn" id="2_oee4b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4srgf"]
 size = Vector2(40, 40)
@@ -11,11 +12,11 @@ size = Vector2(30, 30)
 [node name="FishKoi" type="Node2D"]
 script = ExtResource("1_6dlnu")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hitbox" parent="." instance=ExtResource("2_oee4b")]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_4srgf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

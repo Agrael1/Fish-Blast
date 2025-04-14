@@ -51,8 +51,8 @@ signal ability_hook_hit_ex(data: AbilityFishingLineHitData)
 @onready var _hitbox_area: Area2D = $HitboxArea
 @onready var _input: PlayerInput = $PlayerInput
 @onready var _buffered_input: PlayerBufferedInput = $PlayerInput/PlayerBufferedInput
-@onready var _hook: Area2D = $Hook
-@onready var _bobber: Area2D = $Bobber
+@onready var _hook: ShapeCast2D = $Hook
+@onready var _bobber: ShapeCast2D = $Bobber
 
 var _line_out := LineOut.NONE
 var _line_timer: float = 0
@@ -77,6 +77,7 @@ func _ready() -> void:
 	
 	_hook.visible = false
 	_bobber.visible = false
+	
 	_hitbox_area.area_entered.connect(func(_unused) -> void:
 		CameraControl.shake(4, 0.1))
 	
@@ -107,9 +108,18 @@ func _process(delta: float) -> void:
 		if completion > 0.5:
 			lerp_weight = 2.0 - lerp_weight
 		
+		var final_position := _line_target_point.lerp(global_position, 1.0 - lerp_weight)
+		
 		# TODO: put some nice bouncy curve equation instead of this linear interp
 		if _line_out == LineOut.BOBBER:
-			_bobber.global_position = _line_target_point.lerp(global_position, 1.0 - lerp_weight)
+			_bobber.target_position = final_position - _bobber.global_position
+			_bobber.force_shapecast_update()
+			for collision: int in _bobber.get_collision_count():
+				var colliding_object := _bobber.get_collider(collision) as Hitbox
+				if not colliding_object:
+					continue
+				print("bobbered ", colliding_object.get_parent())
+			_bobber.global_position = final_position
 		else:
 			assert(_line_out == LineOut.HOOK)
 			_hook.global_position = _line_target_point.lerp(global_position, 1.0 - lerp_weight)
