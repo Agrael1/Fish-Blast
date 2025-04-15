@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://la0dchcbm681"]
+[gd_scene load_steps=13 format=3 uid="uid://la0dchcbm681"]
 
 [ext_resource type="Script" uid="uid://cwundcra2h4om" path="res://player/player.gd" id="1_iwajf"]
 [ext_resource type="Texture2D" uid="uid://vcdgv066yger" path="res://assets/textures/player_still.png" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://cvtdx4l852lpo" path="res://player/player_input/player_input.gd" id="2_i65fg"]
 [ext_resource type="Script" uid="uid://dtdfumqlaoaqa" path="res://player/player_buffered_input.gd" id="4_yw30f"]
+[ext_resource type="Script" uid="uid://di0o7w0drt8i0" path="res://player/charge_progress_bar.gd" id="5_qjkh3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_75emq"]
 friction = 0.0
@@ -25,12 +26,26 @@ size = Vector2(10, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
 size = Vector2(10, 10)
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("_hook_charge_bar", "_bobber_charge_bar", "_bobber_hook_bar_visibility_parent", "_hitbox_area", "_input", "_buffered_input", "_hook", "_bobber")]
 collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_75emq")
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_iwajf")
+_bobber_length = null
+_bobber_time = null
+bobber_knockback = null
+_hook_length = null
+_hook_time = null
+_movespeed = null
+_hook_charge_bar = NodePath("CanvasLayer/Control/HookChargeBar")
+_bobber_charge_bar = NodePath("CanvasLayer/Control/BobberChargeBar")
+_bobber_hook_bar_visibility_parent = NodePath("CanvasLayer/Control")
+_hitbox_area = NodePath("HitboxArea")
+_input = NodePath("PlayerInput")
+_buffered_input = NodePath("PlayerInput/PlayerBufferedInput")
+_hook = NodePath("Hook")
+_bobber = NodePath("Bobber")
 
 [node name="PlayerCollisionGeo" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_r8rk1")
@@ -78,3 +93,29 @@ texture = SubResource("PlaceholderTexture2D_g1dw6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hook"]
 shape = SubResource("RectangleShape2D_qjkh3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HookChargeBar" type="ProgressBar" parent="CanvasLayer/Control"]
+texture_filter = 1
+offset_left = -23.0
+offset_top = -22.0
+offset_right = 23.0
+offset_bottom = -16.0
+show_percentage = false
+script = ExtResource("5_qjkh3")
+
+[node name="BobberChargeBar" type="ProgressBar" parent="CanvasLayer/Control"]
+texture_filter = 1
+offset_left = -23.0
+offset_top = -28.0
+offset_right = 23.0
+offset_bottom = -22.0
+show_percentage = false
+script = ExtResource("5_qjkh3")

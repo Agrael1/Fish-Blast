@@ -38,27 +38,34 @@ signal ability_bobber_hit_ex(data: AbilityFishingLineHitData)
 signal ability_hook_hit()
 signal ability_hook_hit_ex(data: AbilityFishingLineHitData)
 
-@export_category("Bobber Stats")
+@export_subgroup("Bobber Stats")
 @export var _bobber_length: float = 80
 @export var _bobber_time: float = 1
 @export var bobber_knockback: float = 1000
 
-@export_category("Hook Stats")
+@export_subgroup("Hook Stats")
 @export var _hook_length: float = 80
 @export var _hook_time: float = 0.2
 
-@export_category("Player Movement")
+@export_subgroup("Movement")
+## Movespeeds in units per second
 @export var _movespeed: float = 350.0
 
-@onready var _hitbox_area: Area2D = $HitboxArea
-@onready var _input: PlayerInput = $PlayerInput
-@onready var _buffered_input: PlayerBufferedInput = $PlayerInput/PlayerBufferedInput
-@onready var _hook: Area2D = $Hook
-@onready var _bobber: Area2D = $Bobber
+@export_subgroup("Node Refs")
+@export var _hook_charge_bar: ProgressBar
+@export var _bobber_charge_bar: ProgressBar
+@export var _bobber_hook_bar_visibility_parent: CanvasItem
+@export var _hitbox_area: Area2D
+@export var _input: PlayerInput
+@export var _buffered_input: PlayerBufferedInput
+@export var _hook: Area2D
+@export var _bobber: Area2D
 
 var _line_out := LineOut.NONE
 var _line_timer: float = 0
 var _line_target_point: Vector2
+var _hook_charge_time: float = 0
+var _bobber_charge_time: float = 0
 
 func _ready() -> void:
 	# there's only one player, so its okay for it to register cvars
@@ -81,6 +88,9 @@ func _ready() -> void:
 	_hook.monitoring = false
 	_bobber.visible = false
 	_bobber.monitoring = false
+	
+	# dont show charge bars by default
+	_bobber_hook_bar_visibility_parent.visible = false
 	
 	_hitbox_area.area_entered.connect(func(_unused) -> void:
 		CameraControl.shake(4, 0.1))
@@ -127,7 +137,40 @@ func _bobber_area_entered(area: Area2D) -> void:
 	hitbox.hit(data)
 
 func _process(delta: float) -> void:
-	_update_line_out_state(delta)
+	const GA = PlayerInput.GameAction
+	var is_charging_hook := false
+	var is_charging_bobber := false
+	
+	const BufferedInputResponse = PlayerBufferedInput.BufferedInputResponse
+	var hook_input: BufferedInputResponse = _buffered_input.get_hook_just_pressed_input()
+	var bobber_input: BufferedInputResponse = _buffered_input.get_bobber_just_pressed_input()
+	
+	if _input.is_action_pressed(GA.CHARGE):
+		# use hook with buffer if we already had some charge
+		if hook_input.is_just_pressed and _line_out == LineOut.NONE and _hook_charge_time > 0:
+			_use_hook()
+			# mark it so it is no longer just pressed, it has been used to activate a hook
+			hook_input.is_just_pressed_and_consume()
+		elif _input.is_action_pressed(GA.HOOK) and _line_out != LineOut.HOOK:
+			# charge whenever your not already hooking
+			_hook_charge_time += delta
+			is_charging_hook = true
+		elif _input.is_action_just_released(GA.HOOK):
+			if _line_out == LineOut.NONE:
+				_use_hook()
+		
+		if _input.is_action_pressed(GA.BOBBER):
+			_bobber_charge_time += delta
+			is_charging_bobber = true
+		elif _input.is_action_just_released(GA.BOBBER):
+			if _line_out == LineOut.NONE:
+				_use_bobber()
+	else:
+		# not charging
+		pass
+	
+	if not is_charging_hook:
+		_hook_charge_time -= delta
 
 func _physics_process(delta: float) -> void:
 	linear_velocity = _input.get_movement_vector() * GsomConsole.get_cvar("player_movespeed")
@@ -152,26 +195,33 @@ func _get_ability_time() -> float:
 	assert(_line_out != LineOut.NONE)
 	return GsomConsole.get_cvar("player_bobber_time" if _line_out == LineOut.BOBBER else "player_hook_time")
 
-func _update_line_out_state(delta: float) -> void:
-	if _line_out == LineOut.NONE:
-		if _buffered_input.get_hook_just_pressed_input().is_just_pressed_and_consume():
-			var c_hook_length: float = GsomConsole.get_cvar("player_hook_length")
-			_line_out = LineOut.HOOK
-			_hook.visible = true
-			_bobber.monitoring = true
-			_line_target_point = global_position + global_position.direction_to(get_global_mouse_position()) * c_hook_length
-			ability_hook_used.emit()
-		elif _buffered_input.get_bobber_just_pressed_input().is_just_pressed_and_consume():
-			var c_bobber_length: float = GsomConsole.get_cvar("player_bobber_length")
-			_line_out = LineOut.BOBBER
-			_bobber.visible = true
-			_bobber.monitoring = true
-			ability_bobber_used.emit()
-			_line_target_point = global_position + global_position.direction_to(get_global_mouse_position()) * c_bobber_length
-		return
+func _update_line_out_state_and_charge(delta: float) -> void:
+	var is_charge_modal_key_pressed: bool = _input.is_action_pressed(PlayerInput.GameAction.CHARGE)
+	
+	if is_charge_modal_key_pressed:
+		_bobber_hook_bar_visibility_parent.visible = true
+		
+		if _input.is_action_pressed(PlayerInput.GameAction.HOOK) and _line_out != LineOut.HOOK:
+			_hook_charge_time += delta
+		elif _input.is_action_just_released(PlayerInput.GameAction.HOOK) and _line_out != LineOut.HOOK:
+			pass
+		
+		if _input.is_action_pressed(PlayerInput.GameAction.BOBBER):
+			_bobber_charge_time += delta
+		
+	else:
+		if _hook_charge_time <= 0 and _bobber_charge_time <= 0:
+			_bobber_hook_bar_visibility_parent.visible = false
+		
+			if _line_out == LineOut.NONE:
+				_change_line_out_state_on_press()
 	
 	_line_timer += delta
-	
+	_remove_line_after_time_up()
+
+## If the timer for the current line ability (hook or bobber) is up, revert back
+## to having nothing cast out and hide the hook/bobber
+func _remove_line_after_time_up() -> void:
 	if _line_timer > _get_ability_time():
 		_line_out = LineOut.NONE
 		_line_timer = 0
@@ -183,3 +233,23 @@ func _update_line_out_state(delta: float) -> void:
 			ability_bobber_completed.emit()
 		else:
 			ability_hook_completed.emit()
+
+func _use_hook() -> void:
+	assert(_line_out == LineOut.NONE)
+	var c_hook_length: float = GsomConsole.get_cvar("player_hook_length")
+	_line_out = LineOut.HOOK
+	_hook.visible = true
+	_hook.monitoring = true
+	_line_target_point = global_position + global_position.direction_to(get_global_mouse_position()) * c_hook_length
+	ability_hook_used.emit()
+	_hook_charge_time = 0
+
+func _use_bobber() -> void:
+	assert(_line_out == LineOut.NONE)
+	var c_bobber_length: float = GsomConsole.get_cvar("player_bobber_length")
+	_line_out = LineOut.BOBBER
+	_bobber.visible = true
+	_bobber.monitoring = true
+	ability_bobber_used.emit()
+	_line_target_point = global_position + global_position.direction_to(get_global_mouse_position()) * c_bobber_length
+	_bobber_charge_time = 0
